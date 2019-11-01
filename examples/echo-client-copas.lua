@@ -11,8 +11,7 @@ local sslparams = {
 
 copas.addthread(function ( )
 	copas.sleep(0.1)
-	local ws_uri="wss://www.bitmex.com/realtime?subscribe=trade:XBTUSD,orderBookL2_25:XBTUSD"
-	-- local ws_uri='wss://echo.websocket.org'
+	local ws_uri='wss://echo.websocket.org'
 	ws_client = require('websocket.client').copas()
 	local r,msg=ws_client:connect(ws_uri,'wss',sslparams)
 	print('connected',r,msg)
