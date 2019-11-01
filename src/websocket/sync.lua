@@ -122,17 +122,22 @@ local connect = function(self,ws_url,ws_protocol,ssl_params)
     return nil,'wrong state',nil
   end
   local protocol,host,port,uri = tools.parse_url(ws_url)
+  self.protocol = protocol
+  self.ssl_params = ssl_params
   -- Preconnect (for SSL if needed)
   local _,err = self:sock_connect(host,port)
   if err then
     return nil,err,nil
   end
   if protocol == 'wss' then
-    self.sock = ssl.wrap(self.sock, ssl_params)
-    self.sock:dohandshake()
+    if not self.ssl_wrapped then
+      self.sock = ssl.wrap(self.sock, ssl_params)
+      self.sock:dohandshake()
+    end
   elseif protocol ~= "ws" then
     return nil, 'bad protocol'
   end
+  ws_protocol = ws_protocol or protocol
   local ws_protocols_tbl = {''}
   if type(ws_protocol) == 'string' then
       ws_protocols_tbl = {ws_protocol}

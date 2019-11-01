@@ -2,13 +2,13 @@ package = "lua-websockets"
 version = "@VERSION@-1"
 
 source = {
-   url = "git://github.com/lipp/lua-websockets.git",     
+   url = "git://github.com/dragoncheng/lua-websockets.git",     
    tag = "@VERSION@"
 }
 
 description = {
   summary = "Websockets for Lua",
-  homepage = "http://github.com/lipp/lua-websockets",
+  homepage = "http://github.com/dragoncheng/lua-websockets",
   license = "MIT/X11",
   detailed = "Provides sync and async clients and servers for copas and lua-ev."
 }

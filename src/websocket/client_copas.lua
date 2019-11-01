@@ -18,6 +18,10 @@ local new = function(ws)
       self.sock:close()
       return nil,err
     end
+    if self.protocol == 'wss' then
+      self.sock = copas.wrap(self.sock):dohandshake(self.ssl_params)
+      self.ssl_wrapped = true
+    end
   end
   
   self.sock_send = function(self,...)
